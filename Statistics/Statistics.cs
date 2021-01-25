@@ -7,6 +7,10 @@ namespace Statistics
     {
         public Stats CalculateStatistics(List<float> numbers) {
             //Implement statistics here
+            float average, min, max;
+            min = numbers.Min(); //calculating min
+            max = numbers.Max(); //calculating max
+            average = numbers.Average(); //calculating average
         }
     }
 }
