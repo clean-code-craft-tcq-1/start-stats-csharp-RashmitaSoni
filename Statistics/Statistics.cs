@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Statistics
 {
-    class StatsComputer
+   public class StatsComputer
     {
         public float average { get; set; }
         public float min { get; set; }
@@ -35,19 +35,19 @@ namespace Statistics
           
 
     }
-    class EmailAlert : IAlerter
+    public class EmailAlert : IAlerter
     {
             public bool emailSent { get; set; }
             public EmailAlert() { this.emailSent = true; }
     }
-    class LEDAlert : EmailAlert,IAlerter
+    public class LEDAlert : EmailAlert,IAlerter
     {
            public bool ledGlows { get; set; }
            public LEDAlert() { this.ledGlows = true; }
 
     }
 
-    class StatsAlerter: LEDAlert
+    public class StatsAlerter: LEDAlert
     {
         public float threshold { get; set; }
         public StatsAlerter(float maxThreshold, IAlerter[] alerters)
