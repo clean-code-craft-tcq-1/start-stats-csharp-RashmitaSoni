@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Statistics
 {
-   public class StatsComputer
+    public class StatsComputer
     {
         public float average { get; set; }
         public float min { get; set; }
@@ -23,45 +23,52 @@ namespace Statistics
             }
             else
             {
+                this.min = (float)Double.NaN;
+                this.max = (float)Double.NaN;
+                this.average = (float)Double.NaN;
                 return Double.NaN;
             }
 
         }
-            
-            
-        }
+
+
+    }
     public interface IAlerter
     {
-          
-
+        bool emailSent { get; set; }
+        bool ledGlows { get; set; }
+  
     }
     public class EmailAlert : IAlerter
     {
-            public bool emailSent { get; set; }
-            public EmailAlert() { this.emailSent = true; }
+        public bool emailSent { get; set; }
+        public bool ledGlows { get; set; }
+      
     }
-    public class LEDAlert : EmailAlert,IAlerter
+    public class LEDAlert : IAlerter
     {
-           public bool ledGlows { get; set; }
-           public LEDAlert() { this.ledGlows = true; }
+        public bool emailSent { get; set; }
+        public bool ledGlows { get; set; }
+        
 
     }
 
-    public class StatsAlerter: LEDAlert
+    public class StatsAlerter
     {
         public float threshold { get; set; }
-        public StatsAlerter(float maxThreshold, IAlerter[] alerters)
+        IAlerter[] alerter;
+        public StatsAlerter(float maxThreshold, IAlerter[] alerter)
         {
-            
             this.threshold = maxThreshold;
-          
+            this.alerter = alerter;
+            
         }
         public void checkAndAlert(List<float> numbers)
         {
             if (numbers.Max() > this.threshold)
             {
-                this.emailSent = true;
-                this.ledGlows = true;
+                this.alerter[0].emailSent = true;
+                this.alerter[1].ledGlows = true;
             }
 
         }
