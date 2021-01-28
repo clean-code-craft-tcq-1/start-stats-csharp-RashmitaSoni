@@ -18,9 +18,9 @@ namespace Statistics
 
     public class StatsComputer
     {
-        internal double average;
-        internal double max;
-        internal double min;
+        public float average;
+        public float max;
+        public float min;
         State state = new State();
         public State CalculateStatistics(List<float> numbers)
         {
