@@ -6,27 +6,43 @@ using System.Threading.Tasks;
 
 namespace Statistics
 {
-    public class StatsComputer
+    public struct State
     {
         public float average { get; set; }
         public float min { get; set; }
         public float max { get; set; }
-        public double CalculateStatistics(List<float> numbers)
+
+
+    }
+
+
+    public class StatsComputer
+    {
+        internal double average;
+        internal double max;
+        internal double min;
+        State state = new State();
+        public State CalculateStatistics(List<float> numbers)
         {
+          
             if (numbers.Any(i => i != 0.0f))
             {
-                this.min = numbers.Min();
-                this.max = numbers.Max();
-                this.average = numbers.Average();
+                state.min = numbers.Min();
+                state.max = numbers.Max();
+                state.average = numbers.Average();
 
-                return 1;
+                this.average = state.average;
+                this.max = state.max;
+                this.min = state.min;
+
+                return state;
             }
             else
             {
-                this.min = (float)Double.NaN;
-                this.max = (float)Double.NaN;
-                this.average = (float)Double.NaN;
-                return Double.NaN;
+                state.min = (float)Double.NaN;
+                state.max = (float)Double.NaN;
+                state.average = (float)Double.NaN;
+                return state;
             }
 
         }
